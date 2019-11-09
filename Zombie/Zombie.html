@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Zombie Hunter</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <img id='zombie' src="images/azombie.png" width="210" height="229.75">
+    <h1 id='score'>Score: 0</h1>
+    <button id='reset'>Reset</button>
+    <audio id="ugh">
+            <source src="src/zombiedie.mp3" type="audio/mp3">
+                audio not supported
+        </audio>
+<script>
+    document.getElementById('zombie').style.top=(window.innerHeight-210) / 2 +"px";
+    document.getElementById('zombie').style.left=(window.innerWidth-229.75) / 2 +"px";
+    document.getElementById('zombie').onclick = explosion;
+    document.getElementById('reset').onclick = resetcounter;
+        
+    function screenwidth(){
+        c = window.innerWidth - 210;
+        return Math.random() * c;
+        }
+
+    function screenheight(){
+        d = window.innerHeight - 229.75;
+        return Math.random() * d;   
+        }
+ 
+    function changeposition(){
+        document.getElementById('zombie').style.position = "absolute";
+        document.getElementById('zombie').style.top=screenheight()+"px";
+        document.getElementById('zombie').style.left=screenwidth()+"px";
+        document.getElementById("zombie").src="images/azombie.png";
+        }
+    
+    let change = document.getElementById("zombie")
+    let audio = document.getElementById("ugh");
+    function explosion(){  
+        if (change.getAttribute('src') == 'images/azombie.png'){
+            clearInterval(intervalID)
+            audio.play();
+            document.getElementById("zombie").src="images/Explosion.gif";
+            setTimeout(changeposition,730);
+            intervalID = setInterval((changeposition),2000);
+            counter()
+            }}
+
+    let count = 0
+    function counter(){
+        count += 1
+        document.getElementById('score').innerHTML = "Score: " + count;
+        }
+
+    function resetcounter(){
+        count = 0
+        document.getElementById('score').innerHTML = "Score: " + count;
+        document.getElementById('zombie').style.top=(window.innerHeight-210) / 2 +"px";
+        document.getElementById('zombie').style.left=(window.innerWidth-229.75) / 2 +"px";
+    }
+
+    let intervalID = setInterval((changeposition),2000);
+</script>
+</body>

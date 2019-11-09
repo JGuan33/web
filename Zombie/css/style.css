@@ -1,0 +1,7 @@
+#zombie {
+    position: absolute;
+}
+body {text-align: center;}
+button {
+    position: absolute;bottom: 10px;
+}
